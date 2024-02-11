@@ -1,0 +1,3 @@
+[submodule "tinyexpr-plusplus"]
+	path = tinyexpr-plusplus
+	url = https://github.com/Blake-Madden/tinyexpr-plusplus
