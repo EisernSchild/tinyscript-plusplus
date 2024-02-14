@@ -21,53 +21,53 @@
  * 2. Altered source versions must be plainly marked as such, and must not be
  * misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
-*/
+ */
 
-/*
- * TINYEXPR++ - Tiny recursive descent parser and evaluation engine in C++
- *
- * Copyright (c) 2020-2024 Blake Madden
- *
- * C++ version of the TinyExpr library.
- *
- * This software is provided 'as-is', without any express or implied
- * warranty. In no event will the authors be held liable for any damages
- * arising from the use of this software.
- *
- * Permission is granted to anyone to use this software for any purpose,
- * including commercial applications, and to alter it and redistribute it
- * freely, subject to the following restrictions:
- *
- * 1. The origin of this software must not be misrepresented; you must not
- * claim that you wrote the original software. If you use this software
- * in a product, an acknowledgement in the product documentation would be
- * appreciated but is not required.
- * 2. Altered source versions must be plainly marked as such, and must not be
- * misrepresented as being the original software.
- * 3. This notice may not be removed or altered from any source distribution.
-*/
+ /*
+  * TINYEXPR++ - Tiny recursive descent parser and evaluation engine in C++
+  *
+  * Copyright (c) 2020-2024 Blake Madden
+  *
+  * C++ version of the TinyExpr library.
+  *
+  * This software is provided 'as-is', without any express or implied
+  * warranty. In no event will the authors be held liable for any damages
+  * arising from the use of this software.
+  *
+  * Permission is granted to anyone to use this software for any purpose,
+  * including commercial applications, and to alter it and redistribute it
+  * freely, subject to the following restrictions:
+  *
+  * 1. The origin of this software must not be misrepresented; you must not
+  * claim that you wrote the original software. If you use this software
+  * in a product, an acknowledgement in the product documentation would be
+  * appreciated but is not required.
+  * 2. Altered source versions must be plainly marked as such, and must not be
+  * misrepresented as being the original software.
+  * 3. This notice may not be removed or altered from any source distribution.
+  */
 
-/*
- * TINYSCRIPT++ - Tiny script parser based on TinyExpr in C++
- *
- * Copyright (c) 2024 Denis Reischl
- *
- * This software is provided 'as-is', without any express or implied
- * warranty. In no event will the authors be held liable for any damages
- * arising from the use of this software.
- *
- * Permission is granted to anyone to use this software for any purpose,
- * including commercial applications, and to alter it and redistribute it
- * freely, subject to the following restrictions:
- *
- * 1. The origin of this software must not be misrepresented; you must not
- * claim that you wrote the original software. If you use this software
- * in a product, an acknowledgement in the product documentation would be
- * appreciated but is not required.
- * 2. Altered source versions must be plainly marked as such, and must not be
- * misrepresented as being the original software.
- * 3. This notice may not be removed or altered from any source distribution.
-*/
+  /*
+   * TINYSCRIPT++ - Tiny script parser based on TinyExpr in C++
+   *
+   * Copyright (c) 2024 Denis Reischl
+   *
+   * This software is provided 'as-is', without any express or implied
+   * warranty. In no event will the authors be held liable for any damages
+   * arising from the use of this software.
+   *
+   * Permission is granted to anyone to use this software for any purpose,
+   * including commercial applications, and to alter it and redistribute it
+   * freely, subject to the following restrictions:
+   *
+   * 1. The origin of this software must not be misrepresented; you must not
+   * claim that you wrote the original software. If you use this software
+   * in a product, an acknowledgement in the product documentation would be
+   * appreciated but is not required.
+   * 2. Altered source versions must be plainly marked as such, and must not be
+   * misrepresented as being the original software.
+   * 3. This notice may not be removed or altered from any source distribution.
+   */
 
 #ifndef __TINYSCRIPT_PLUS_PLUS_H__
 #define __TINYSCRIPT_PLUS_PLUS_H__
@@ -137,8 +137,46 @@ public:
 		pasVars = std::make_shared<std::set<ts_variable>>(asVars);
 		pasBools = std::make_shared<std::set<ts_boolean>>(asBools);
 
+		// remove comments
+		atScript = {};
+		bool bSingleLine = false, bMultiLine = false;
+		for (size_t n = 0; n < atCode.size(); n++)
+		{
+			std::array<char, 2> at = { atCode[n], ((n + 1) < atCode.size()) ? atCode[n + 1] : ' ' };
+
+			if (bSingleLine == true && at[0] == '\n')
+			{
+				// single line comment flag ?
+				bSingleLine = false;
+			}
+			else if (bMultiLine == true && at[0] == '*' && at[1] == '/')
+			{
+				// multiple line comment ? 
+				bMultiLine = false;
+				n++;
+			}
+			else if (bSingleLine || bMultiLine)
+			{
+				// is in comment
+				continue;
+			}
+			else if (at[0] == '/' && at[1] == '/')
+			{
+				// new comment
+				bSingleLine = true;
+				n++;
+			}
+			else if (at[0] == '/' && at[1] == '*')
+			{
+				// new comment
+				bMultiLine = true;
+				n++;
+			}
+			else
+				atScript += at[0];
+		}
+
 		// cleanup the script
-		atScript = std::string(atCode);
 		atScript.erase(std::remove(atScript.begin(), atScript.end(), '\r'), atScript.end());
 		atScript.erase(std::remove(atScript.begin(), atScript.end(), '\n'), atScript.end());
 		atScript.erase(std::remove(atScript.begin(), atScript.end(), '\t'), atScript.end());
@@ -167,6 +205,7 @@ public:
 			while ((at.size()) && (at.back() == ' '))
 				at.erase(at.end() - 1);
 
+			// skip empty
 			if (!at.size()) continue;
 
 			// add curly braces for one line "if" statements to split them later
@@ -204,6 +243,9 @@ public:
 			}
 			if (uFind < at.size()) aatSmeSplit.push_back(at.substr(uFind, at.size() - uFind));
 		}
+
+		// set level flags vector size to 1
+		aeFlags.resize(1);
 
 		// loop through statements and compile them
 		for (std::string& at : aatSmeSplit)
