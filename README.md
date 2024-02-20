@@ -1,7 +1,7 @@
 
 # TinyScript++
 
-Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codeplea/tinyexpr)/[*TinyExpr++*](https://github.com/Blake-Madden/tinyexpr-plusplus). Embed a simple scripting language within your C++ project.
+Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codeplea/tinyexpr)/[*TinyExpr++*](https://github.com/Blake-Madden/tinyexpr-plusplus). Embed a simple scripting language (in C Code Style) within your C++ project.
 
 ## Features
 
@@ -18,11 +18,17 @@ Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codepl
 
 ## Building
 
-add following files to your project :
+- add following files to your project :
 
     * "tinyscript.h"
     * "tinyexpr.h"
     * "tinyexpr.cpp"
+
+- define "TE_FLOAT" if using "float" type instead of "double" for expressions (in "tinyexpr.cpp" as well)
+- include "tinyscript.h"
+- enlist variables (both floating point and boolean)
+- provide your script code string to TinyScript++ to compile
+- evaluate the compiled script with the values given to your variables
 
 ## Example
 
