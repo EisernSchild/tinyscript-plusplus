@@ -74,11 +74,12 @@
 
 #include "tinyexpr-plusplus/tinyexpr.h"
 #include <sstream>
+#include <array>
 
 #define TS_OK 0
 #define TS_FAIL -1
 
-/// <summary>copy of te_variable with non constant value pointer</summary>
+   /// <summary>copy of te_variable with non constant value pointer</summary>
 class ts_variable
 {
 public:
@@ -455,7 +456,17 @@ private:
 		/// <summary>pop next character in expression</summary>
 		char pop() { if (uNext++ < atStatement.size()) return atStatement[uNext - 1]; else return 0; }
 		/// <summary>pop next number in expression</summary>
-		void pop_number() { size_t uIx = 0; float fRet = std::stof(atStatement.substr(uNext), &uIx); uNext += uIx; sValue = (te_type)fRet; eType = token_type::TOK_NUMBER; }
+		void pop_number() 
+		{ 
+			size_t uIx = 0; 
+#ifdef TE_FLOAT
+			te_type fRet = std::stof(atStatement.substr(uNext), &uIx);
+#else
+			te_type fRet = std::stod(atStatement.substr(uNext), &uIx);
+#endif
+			uNext += uIx; sValue = (te_type)fRet; 
+			eType = token_type::TOK_NUMBER; 
+		}
 		/// <summary>pop next vocable</summary>
 		void pop_vocable()
 		{
@@ -1136,7 +1147,7 @@ private:
 		}
 
 		/// <summary>get floating value from term</summary>
-		[[nodiscard]] float get_float(term& sTerm)
+		[[nodiscard]] te_type get_float(term& sTerm)
 		{
 			switch (sTerm.eType)
 			{
@@ -1155,7 +1166,7 @@ private:
 		}
 
 		/// <summary>get floating value from term</summary>
-		[[nodiscard]] float get_float(term_level& sTerm)
+		[[nodiscard]] te_type get_float(term_level& sTerm)
 		{
 			switch (sTerm.eType)
 			{
@@ -1348,7 +1359,7 @@ private:
 			}
 			break;
 			case ts_parser::state::token_type::TOK_ELSE:
-				OutputDebugStringA("TOK_ELSE");
+				// TODO !! ELSE !!
 				break;
 			case ts_parser::state::token_type::TOK_VAR_FLOAT:
 			{

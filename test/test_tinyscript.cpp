@@ -1,34 +1,74 @@
+// SPDX-License-Identifier: Zlib
+/*
+ * TINYEXPR - Tiny recursive descent parser and evaluation engine in C
+ *
+ * Copyright (c) 2015-2020 Lewis Van Winkle
+ *
+ * http://CodePlea.com
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgement in the product documentation would be
+ * appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ * misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ */
 
-# TinyScript++
+ /*
+  * TINYEXPR++ - Tiny recursive descent parser and evaluation engine in C++
+  *
+  * Copyright (c) 2020-2024 Blake Madden
+  *
+  * C++ version of the TinyExpr library.
+  *
+  * This software is provided 'as-is', without any express or implied
+  * warranty. In no event will the authors be held liable for any damages
+  * arising from the use of this software.
+  *
+  * Permission is granted to anyone to use this software for any purpose,
+  * including commercial applications, and to alter it and redistribute it
+  * freely, subject to the following restrictions:
+  *
+  * 1. The origin of this software must not be misrepresented; you must not
+  * claim that you wrote the original software. If you use this software
+  * in a product, an acknowledgement in the product documentation would be
+  * appreciated but is not required.
+  * 2. Altered source versions must be plainly marked as such, and must not be
+  * misrepresented as being the original software.
+  * 3. This notice may not be removed or altered from any source distribution.
+  */
 
-Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codeplea/tinyexpr)/[*TinyExpr++*](https://github.com/Blake-Madden/tinyexpr-plusplus). Embed a simple scripting language within your C++ project.
+  /*
+   * TINYSCRIPT++ - Tiny script parser based on TinyExpr in C++
+   *
+   * Copyright (c) 2024 Denis Reischl
+   *
+   * This software is provided 'as-is', without any express or implied
+   * warranty. In no event will the authors be held liable for any damages
+   * arising from the use of this software.
+   *
+   * Permission is granted to anyone to use this software for any purpose,
+   * including commercial applications, and to alter it and redistribute it
+   * freely, subject to the following restrictions:
+   *
+   * 1. The origin of this software must not be misrepresented; you must not
+   * claim that you wrote the original software. If you use this software
+   * in a product, an acknowledgement in the product documentation would be
+   * appreciated but is not required.
+   * 2. Altered source versions must be plainly marked as such, and must not be
+   * misrepresented as being the original software.
+   * 3. This notice may not be removed or altered from any source distribution.
+   */
 
-## Features
-
-! Note that this project is in alpha stage and NOT (!) fully tested ! Currently bug-fixing !
-
-- **C++17 with no dependencies**.
-- Only three files : Single source/header file (TinyScript), source and header file (TinyExpr).
-- Simple and fast.
-- Implements TinyExpr for expression statements.
-- Floating point/Boolean expression statements and If statements
-- Released under the zlib license - free for nearly any use.
-- Easy to use and integrate with your code.
-- Thread-safe; parser is in a self-contained object.
-
-## Building
-
-add following files to your project :
-
-    * "tinyscript.h"
-    * "tinyexpr.h"
-    * "tinyexpr.cpp"
-
-## Example
-
-[TinyScript++ Test](https://github.com/EisernSchild/tinyscript-plusplus/blob/main/test/test_tinyscript.h)
-
-```cpp
 // dont forget to define that in "tinyexpr.cpp" as well if using float
 #define TE_FLOAT
 
@@ -148,40 +188,3 @@ int main()
 				std::cout << "Alpha, Beta, Gamma (TinyScript++) : " << fAlpha << ", " << fBeta << ", " << fGamma << "\n\n";
 			}
 }
-```
-
-Outputs currently (boolean bug present !) :
-
-```console
-Target (x/y/z) : -1.1/ 0.5/ 1.3
-Alpha, Beta, Gamma (C++)          : 0.125719, 2.53366, 4.01013
-Alpha, Beta, Gamma (TinyScript++) : 0.125719, 2.53366, 0.868539
-
-Target (x/y/z) : -1.1/ 0.5/ 1.4
-Alpha, Beta, Gamma (C++)          : 0.155852, 2.49532, 4.04642
-Alpha, Beta, Gamma (TinyScript++) : 0.155852, 2.49532, 0.904827
-
-Target (x/y/z) : -1.1/ 1.9/ 1.3
-Alpha, Beta, Gamma (C++)          : 0.146409, 2.14222, 4.01013
-Alpha, Beta, Gamma (TinyScript++) : 0.146409, 2.14222, 0.868539
-
-Target (x/y/z) : -1.1/ 1.9/ 1.4
-Alpha, Beta, Gamma (C++)          : 0.163225, 2.1157, 4.04642
-Alpha, Beta, Gamma (TinyScript++) : 0.163225, 2.1157, 0.904827
-
-Target (x/y/z) : 1.2/ 0.5/ 1.3
-Alpha, Beta, Gamma (C++)          : 1.30397, 2.50087, -0.825377
-Alpha, Beta, Gamma (TinyScript++) : 1.30397, 2.50087, -0.825377
-
-Target (x/y/z) : 1.2/ 0.5/ 1.4
-Alpha, Beta, Gamma (C++)          : 1.29268, 2.46413, -0.86217
-Alpha, Beta, Gamma (TinyScript++) : 1.29268, 2.46413, -0.86217
-
-Target (x/y/z) : 1.2/ 1.9/ 1.3
-Alpha, Beta, Gamma (C++)          : 1.31315, 2.1196, -0.825377
-Alpha, Beta, Gamma (TinyScript++) : 1.31315, 2.1196, -0.825377
-
-Target (x/y/z) : 1.2/ 1.9/ 1.4
-Alpha, Beta, Gamma (C++)          : 1.29052, 2.09343, -0.86217
-Alpha, Beta, Gamma (TinyScript++) : 1.29052, 2.09343, -0.86217
-```
