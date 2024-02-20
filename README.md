@@ -26,7 +26,7 @@ add following files to your project :
 
 ## Example
 
-[TinyScript++ Test](https://github.com/EisernSchild/tinyscript-plusplus/blob/main/test/test_tinyscript.h)
+[TinyScript++ Test](test/test_tinyscript.cpp)
 
 ```cpp
 // dont forget to define that in "tinyexpr.cpp" as well if using float
