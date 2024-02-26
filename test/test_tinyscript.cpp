@@ -77,6 +77,10 @@
 
 #define PI 3.141592654f
 
+/// <summary>
+/// C++ version of the used function
+/// (Inverse Kinematics function)
+/// </summary>
 void IK_EndEffectorToTargetAngles(
 	float fTarX, float fTarY, float fTarZ,     /* <= base to target local vector */
 	float fA,                                  /* <= length of bone 1 */
@@ -133,7 +137,8 @@ int main()
 		{ "fD", &fD }
 	};
 
-	// script (copy from c++ code)
+	// TinyScript++ version of the used function
+	// (Inverse Kinematics function)
 	std::string_view atCode =
 		"	                                                            \n\r\
 		// length base->target, length(ad)	                            \n\r\
