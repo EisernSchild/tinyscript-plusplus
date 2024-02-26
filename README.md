@@ -1,11 +1,11 @@
 
-# TinyScript++
+# *TinyScript++*
 
 Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codeplea/tinyexpr)/[*TinyExpr++*](https://github.com/Blake-Madden/tinyexpr-plusplus). Embed a simple scripting language (in C Code Style) within your C++ project.
 
-## Features
+## Features - mostly adopted from *TinyExpr++*
 
-! Note that this project is in alpha stage and NOT (!) fully tested !
+**! Note that this project is in alpha stage and NOT (!) fully tested !**
 
 - **C++17 with no dependencies**.
 - Only three files : Single source/header file (TinyScript), source and header file (TinyExpr).
@@ -19,15 +19,13 @@ Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codepl
 ## Building
 
 - add following files to your project :
-
-    * "tinyscript.h"
-    * "tinyexpr.h"
-    * "tinyexpr.cpp"
-
-- define "TE_FLOAT" if using "float" type instead of "double" for expressions (in "tinyexpr.cpp" as well)
-- include "tinyscript.h"
+    * **"tinyscript.h"**
+    * **"tinyexpr.h"**
+    * **"tinyexpr.cpp"**
+- define **"TE_FLOAT"** if using **"float"** type instead of **"double"** for expressions (in **"tinyexpr.cpp"** as well)
+- include **"tinyscript.h"**
 - enlist variables (both floating point and boolean)
-- provide your script code string to TinyScript++ to compile
+- provide your script code string to ***TinyScript++*** to compile
 - evaluate the compiled script with the values given to your variables
 
 ## Example
@@ -110,30 +108,30 @@ int main()
 		// length base->target, length(ad)	                            \n\r\
 		fB = sqrt(fTarX * fTarX + fTarY * fTarY + fTarZ * fTarZ);	    \n\r\
 		fD = sqrt(fTarX * fTarX + fTarZ * fTarZ);	                    \n\r\
-		                                                                \n\r\
+		                                                                    \n\r\
 		// triangle angles	                                            \n\r\
-		                                                                \n\r\
+		                                                                    \n\r\
 		// arccos(b*b + c*c - a*a) / 2bc	                            \n\r\
-		fAlpha = acos((fB * fB + fC * fC - fA * fA) / (2. * fB * fC));	\n\r\
+		fAlpha = acos((fB * fB + fC * fC - fA * fA) / (2. * fB * fC));	    \n\r\
 		// arccos(a*a + c*c - b*b) / 2ac	                            \n\r\
-		fBeta = acos((fA * fA + fC * fC - fB * fB) / (2. * fA * fC));	\n\r\
-		                                                                \n\r\
+		fBeta = acos((fA * fA + fC * fC - fB * fB) / (2. * fA * fC));	    \n\r\
+		                                                                    \n\r\
 		// triangle angles to local angles	                            \n\r\
-		                                                                \n\r\
-		// arctan(cy-dy / length(ad))	                                \n\r\
+		                                                                    \n\r\
+		// arctan(cy-dy / length(ad))	                                    \n\r\
 		fAlpha = fAlpha + atan(fTarX / fD);	                            \n\r\
-		// PI - beta	                                                \n\r\
+		// PI - beta	                                                    \n\r\
 		fBeta = abs(3.141592654 - fBeta);	                            \n\r\
-		                                                                \n\r\
-		// Y rotation	                                                \n\r\
-		                                                                \n\r\
+		                                                                    \n\r\
+		// Y rotation	                                                    \n\r\
+		                                                                    \n\r\
 		// -arctan(z / y)	                                            \n\r\
-		fGamma = -atan(fTarZ / fTarX);	                                \n\r\
-		if (fTarX < 0.)	                                                \n\r\
+		fGamma = -atan(fTarZ / fTarX);	                                    \n\r\
+		if (fTarX < 0.)	                                                    \n\r\
 		{	                                                            \n\r\
 			fGamma = 3.141592654 + fGamma;	                            \n\r\
 		}	                                                            \n\r\
-		                                                                \n\r\
+		                                                                    \n\r\
 	";
 
 	// ... and compile
