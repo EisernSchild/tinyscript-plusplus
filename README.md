@@ -5,7 +5,7 @@ Tiny script parser and compiler, based on [*TinyExpr*](https://github.com/codepl
 
 ## Features
 
-! Note that this project is in alpha stage and NOT (!) fully tested ! Currently bug-fixing !
+! Note that this project is in alpha stage and NOT (!) fully tested !
 
 - **C++17 with no dependencies**.
 - Only three files : Single source/header file (TinyScript), source and header file (TinyExpr).
@@ -156,24 +156,24 @@ int main()
 }
 ```
 
-Outputs currently (boolean bug present !) :
+Outputs :
 
 ```console
 Target (x/y/z) : -1.1/ 0.5/ 1.3
 Alpha, Beta, Gamma (C++)          : 0.125719, 2.53366, 4.01013
-Alpha, Beta, Gamma (TinyScript++) : 0.125719, 2.53366, 0.868539
+Alpha, Beta, Gamma (TinyScript++) : 0.125719, 2.53366, 4.01013
 
 Target (x/y/z) : -1.1/ 0.5/ 1.4
 Alpha, Beta, Gamma (C++)          : 0.155852, 2.49532, 4.04642
-Alpha, Beta, Gamma (TinyScript++) : 0.155852, 2.49532, 0.904827
+Alpha, Beta, Gamma (TinyScript++) : 0.155852, 2.49532, 4.04642
 
 Target (x/y/z) : -1.1/ 1.9/ 1.3
 Alpha, Beta, Gamma (C++)          : 0.146409, 2.14222, 4.01013
-Alpha, Beta, Gamma (TinyScript++) : 0.146409, 2.14222, 0.868539
+Alpha, Beta, Gamma (TinyScript++) : 0.146409, 2.14222, 4.01013
 
 Target (x/y/z) : -1.1/ 1.9/ 1.4
 Alpha, Beta, Gamma (C++)          : 0.163225, 2.1157, 4.04642
-Alpha, Beta, Gamma (TinyScript++) : 0.163225, 2.1157, 0.904827
+Alpha, Beta, Gamma (TinyScript++) : 0.163225, 2.1157, 4.04642
 
 Target (x/y/z) : 1.2/ 0.5/ 1.3
 Alpha, Beta, Gamma (C++)          : 1.30397, 2.50087, -0.825377

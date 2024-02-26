@@ -752,7 +752,7 @@ private:
 			, pasVars(_pasVars)
 			, pbDestBool(_pbDestBool)
 		{
-			if ((_pbDestBool != nullptr) && (_uDestIx >= (unsigned)_pasBools->size()))
+			if ((_pbDestBool == nullptr) && (_uDestIx >= (unsigned)_pasBools->size()))
 			{
 				nErr = TS_FAIL;
 				return;
