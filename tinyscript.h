@@ -330,6 +330,12 @@ public:
 		}
 	}
 
+	/// <summary>returns error message and position</summary>
+	std::pair<int64_t, uint32_t> error()
+	{
+		return std::make_pair(nErr, (uErrLine << 16) + (uErrMark & 0xFFFF));
+	}
+
 private:
 
 	/// <summary>possible statement types</summary>
@@ -1480,6 +1486,10 @@ private:
 	unsigned uBlockLevel = 0;
 	/// <summary>0 if script compiled</summary>
 	int64_t nErr = TS_OK;
+	/// <summary>y position of the error</summary>
+	uint32_t uErrLine = 0;
+	/// <summary>X position of the error</summary>
+	uint32_t uErrMark = 0;
 };
 
 #endif /// __TINYSCRIPT_PLUS_PLUS_H__
